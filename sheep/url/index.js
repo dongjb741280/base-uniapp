@@ -1,6 +1,21 @@
 import $store from '@/sheep/store';
 import { staticUrl } from '@/sheep/config';
 
+// 随应用打包的图片，默认直接使用本地路径。
+const bundledStaticPaths = new Set([
+  '/static/img/shop/default_avatar.png',
+  '/static/img/shop/order/no_pay.png',
+  '/static/img/shop/order/no_take.png',
+  '/static/img/shop/order/no_comment.png',
+  '/static/img/shop/order/change_order.png',
+  '/static/img/shop/order/all_order.png',
+  '/static/img/shop/order/nouse_coupon.png',
+  '/static/img/shop/order/useend_coupon.png',
+  '/static/img/shop/order/out_coupon.png',
+  '/static/img/shop/order/all_coupon.png',
+  '/static/img/shop/user/wallet_icon.png',
+]);
+
 const cdn = (url = '', cdnurl = '') => {
   if (!url) return '';
   if (url.indexOf('http') === 0) {
@@ -22,6 +37,9 @@ export default {
   // 静态资源地址
   static: (url = '', staticurl = '') => {
     if (staticurl === '') {
+      if (bundledStaticPaths.has(url)) {
+        return url;
+      }
       staticurl = staticUrl;
     }
     if (staticurl !== 'local') {

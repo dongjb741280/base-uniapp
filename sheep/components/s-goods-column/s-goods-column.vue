@@ -678,7 +678,6 @@
         scrollOffset: true,
       });
       view.exec((data) => {
-        console.log(data, 'data');
         let totalHeight = 0;
         const goodsPriceCard = data[0];
         defaultImgWidth.value = data[0].width;

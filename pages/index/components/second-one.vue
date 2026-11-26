@@ -19,7 +19,11 @@
           })
         "
       >
-        <image class="goods-img" :src="item.picUrl" mode="aspectFill" />
+        <image
+          class="goods-img"
+          :src="item.picUrl === legacyHanfuImage ? '/static/goods-empty.png' : item.picUrl"
+          mode="aspectFill"
+        />
         <view class="ss-p-10">
           <view class="goods-title ss-line-1">{{ item.name }}</view>
         </view>
@@ -30,6 +34,9 @@
 
 <script setup>
   import sheep from '@/sheep';
+
+  // 兼容旧演示数据中的失效图片地址。
+  const legacyHanfuImage = 'https://loremflickr.com/200/200/chinese,traditional,dress';
 
   const props = defineProps({
     data: {
